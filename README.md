@@ -215,12 +215,10 @@ npm run lint:fix
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
 5. 開啟Pull Request
 
-## 授權
+<!-- ## 授權 -->
 
-此專案使用MIT授權 - 詳見 [LICENSE](LICENSE) 檔案
+<!-- 此專案使用MIT授權 - 詳見 [LICENSE](LICENSE) 檔案 -->
 
 ## 聯絡資訊
 
-baseserver Team - [your-email@example.com](mailto:your-email@example.com)
-
-專案連結: [https://github.com/your-username/baseserver-backend](https://github.com/your-username/baseserver-backend)
+信箱 - [cool24583185@gmail.com](mailto:cool24583185@gmail.com)
