@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# RightYeh Backend Setup Script
-echo "🚀 Setting up RightYeh Backend..."
+# baseserver Backend Setup Script
+echo "🚀 Setting up baseserver Backend..."
 
 # Check if Node.js is installed
 if ! command -v node &> /dev/null; then

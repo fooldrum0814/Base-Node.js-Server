@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../app');
 
-describe('RightYeh Backend API', () => {
+describe('baseserver Backend API', () => {
   describe('Health Check', () => {
     test('GET /health should return 200', async () => {
       const response = await request(app)

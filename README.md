@@ -1,4 +1,4 @@
-# RightYeh Backend Server
+# Node.js Backend Server
 
 一個基於Node.js的後端伺服器，整合OpenAI Assistant API，提供RESTful API供mobile app使用，並支援部署到Google Cloud Platform (GCP)。
 
@@ -15,7 +15,7 @@
 ## 專案結構
 
 ```
-RightYeh/
+BaseServer/
 ├── src/
 │   ├── app.js                 # 主應用程式入口
 │   ├── middleware/           # 中介軟體
@@ -152,14 +152,14 @@ gcloud builds submit --config cloudbuild.yaml
 
 ```bash
 # 建構映像
-docker build -t gcr.io/YOUR_PROJECT_ID/rightyeh-backend .
+docker build -t gcr.io/YOUR_PROJECT_ID/baseserver-backend .
 
 # 推送到Container Registry
-docker push gcr.io/YOUR_PROJECT_ID/rightyeh-backend
+docker push gcr.io/YOUR_PROJECT_ID/baseserver-backend
 
 # 部署到Cloud Run
-gcloud run deploy rightyeh-backend \
-  --image gcr.io/YOUR_PROJECT_ID/rightyeh-backend \
+gcloud run deploy baseserver-backend \
+  --image gcr.io/YOUR_PROJECT_ID/baseserver-backend \
   --region asia-east1 \
   --platform managed \
   --allow-unauthenticated
@@ -221,6 +221,6 @@ npm run lint:fix
 
 ## 聯絡資訊
 
-RightYeh Team - [your-email@example.com](mailto:your-email@example.com)
+baseserver Team - [your-email@example.com](mailto:your-email@example.com)
 
-專案連結: [https://github.com/your-username/rightyeh-backend](https://github.com/your-username/rightyeh-backend)
+專案連結: [https://github.com/your-username/baseserver-backend](https://github.com/your-username/baseserver-backend)

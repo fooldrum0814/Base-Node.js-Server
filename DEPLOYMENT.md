@@ -1,6 +1,6 @@
 # GCP 部署指南
 
-本文件說明如何將RightYeh Backend部署到Google Cloud Platform。
+本文件說明如何將baseserver Backend部署到Google Cloud Platform。
 
 ## 前置需求
 
@@ -64,18 +64,18 @@ gcloud builds submit --config cloudbuild.yaml
 
 1. **建構Docker映像**
 ```bash
-docker build -t gcr.io/YOUR_PROJECT_ID/rightyeh-backend .
+docker build -t gcr.io/YOUR_PROJECT_ID/baseserver-backend .
 ```
 
 2. **推送到Container Registry**
 ```bash
-docker push gcr.io/YOUR_PROJECT_ID/rightyeh-backend
+docker push gcr.io/YOUR_PROJECT_ID/baseserver-backend
 ```
 
 3. **部署到Cloud Run**
 ```bash
-gcloud run deploy rightyeh-backend \
-  --image gcr.io/YOUR_PROJECT_ID/rightyeh-backend \
+gcloud run deploy baseserver-backend \
+  --image gcr.io/YOUR_PROJECT_ID/baseserver-backend \
   --region asia-east1 \
   --platform managed \
   --allow-unauthenticated \
@@ -105,7 +105,7 @@ env_variables:
 使用gcloud設定：
 
 ```bash
-gcloud run services update rightyeh-backend \
+gcloud run services update baseserver-backend \
   --set-env-vars="NODE_ENV=production,OPENAI_API_KEY=your_key,OPENAI_ASSISTANT_ID=your_id"
 ```
 
@@ -117,7 +117,7 @@ gcloud secrets create openai-api-key --data-file=-
 # 輸入您的API金鑰後按Ctrl+D
 
 # 在Cloud Run中使用secret
-gcloud run services update rightyeh-backend \
+gcloud run services update baseserver-backend \
   --set-secrets="OPENAI_API_KEY=openai-api-key:latest"
 ```
 
@@ -130,7 +130,7 @@ gcloud run services update rightyeh-backend \
 gcloud app logs tail
 
 # Cloud Run
-gcloud run services logs tail rightyeh-backend --region=asia-east1
+gcloud run services logs tail baseserver-backend --region=asia-east1
 ```
 
 ### 設定監控
@@ -186,7 +186,7 @@ automatic_scaling:
 
 **Cloud Run:**
 ```bash
-gcloud run services update rightyeh-backend \
+gcloud run services update baseserver-backend \
   --min-instances=1 \
   --max-instances=10 \
   --cpu-throttling
@@ -211,7 +211,7 @@ gcloud compute backend-services create api-backend \
 
 ```bash
 # 建立Cloud SQL實例
-gcloud sql instances create rightyeh-db \
+gcloud sql instances create baseserver-db \
   --database-version=POSTGRES_13 \
   --tier=db-f1-micro \
   --region=asia-east1
@@ -231,7 +231,7 @@ gcloud services enable firestore.googleapis.com
 1. **建立trigger**
 ```bash
 gcloud builds triggers create github \
-  --repo-name=rightyeh-backend \
+  --repo-name=baseserver-backend \
   --repo-owner=your-username \
   --branch-pattern="^main$" \
   --build-config=cloudbuild.yaml
@@ -292,10 +292,10 @@ gcloud app describe
 npm run dev
 
 # 測試Docker映像
-docker run -p 8080:8080 gcr.io/YOUR_PROJECT_ID/rightyeh-backend
+docker run -p 8080:8080 gcr.io/YOUR_PROJECT_ID/baseserver-backend
 
 # 檢查服務狀態
-gcloud run services describe rightyeh-backend --region=asia-east1
+gcloud run services describe baseserver-backend --region=asia-east1
 ```
 
 ## 成本優化
@@ -306,7 +306,7 @@ gcloud run services describe rightyeh-backend --region=asia-east1
 # 建立預算
 gcloud billing budgets create \
   --billing-account=YOUR_BILLING_ACCOUNT \
-  --display-name="RightYeh Budget" \
+  --display-name="baseserver Budget" \
   --budget-amount=100USD
 ```
 
@@ -324,7 +324,7 @@ gcloud billing budgets create \
 
 ```bash
 # Cloud SQL自動備份
-gcloud sql instances patch rightyeh-db \
+gcloud sql instances patch baseserver-db \
   --backup-start-time=03:00 \
   --retained-backups-count=7
 ```
@@ -335,9 +335,9 @@ gcloud sql instances patch rightyeh-db \
 
 ```bash
 # 部署到多個區域
-gcloud run deploy rightyeh-backend \
+gcloud run deploy baseserver-backend \
   --region=asia-east1,us-central1 \
-  --image=gcr.io/YOUR_PROJECT_ID/rightyeh-backend
+  --image=gcr.io/YOUR_PROJECT_ID/baseserver-backend
 ```
 
 ## 支援和資源
